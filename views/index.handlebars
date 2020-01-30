@@ -1,3 +1,58 @@
-// TODO - Setup the index.handlebars to have the template that Handlebars can render onto.
+<!DOCTYPE html>
+<html lang="en">
 
-// TODO - Create a button in index.handlebars that will submit the user input into the database.
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Burger App</title>
+  <link rel="stylesheet" href="css/burger_style.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div class="col-3">
+    <div class="col-left">
+      <h1>Burgers Ready to Eat</h1>
+      {{> left }}
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="col-mid">
+      <img class="" src="img/hamburger.jpg">
+      <h1>Pick Your Burger</h1>
+      <form method="POST" action="/add">
+        <textarea name="burger" id="burgerText" rows="4" placeholder="Your burger description here"></textarea>
+        <p>
+          <button id="btnSubmit" class="btn btn-primary" type="submit">Submit</button>
+        </p>
+      </form>
+      <p>Enter a description of the burger you would like to eat and hit submit</p>
+    </div>
+  </div>
+  <div class="col-3">
+    <div class="col-right">
+      <h1>Wall of Shame</h1>
+      {{> right }}
+    </div>
+  </div>
+
+</body>
+<script>
+  // Devour a new burger
+  var listLeftEl = document.getElementById("list-left");
+  listLeftEl.addEventListener("click", function (event) {
+    if (event.target.matches(".devour")) {
+      var btn = event.target;
+      var li = btn.parentElement;
+      var id = li.getAttribute("data-id");
+      axios.post(`/update/${id}`, { id: id, devoured: true })
+        .then(() => {
+          window.location.href = "/";
+        });
+    }
+  });
+
+</script>
+
+</html>

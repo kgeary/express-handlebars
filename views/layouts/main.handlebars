@@ -1,1 +1,13 @@
-// TODO - Setup the main.handlebars file so it's able to be used by Handlebars.
+{{#unless burgers.length }}
+<h3>No Burgers Yet</h3>
+{{/unless}}
+<ul class="burger_list" id="list-{{side}}">
+  {{#each burgers}}
+  <li class="listItem" data-id="{{this.id}}">
+    <span>{{this.id}} - {{this.burger_name}}</span>
+    {{#unless this.devoured }}
+    <button class="devour" type="button">Devour</button>
+    {{/unless}}
+  </li>
+  {{/each}}
+</ul>

@@ -1,8 +1,42 @@
 const orm = require("../config/orm");
 
+class Burger {
+  constructor() {
+    // No properties yet.
+  }
 
-//create the code that will call the ORM functions using burger specific input for the ORM.
+  async getAll() {
+    try {
+      const res = await orm.selectAll();
+      return res;
+    } catch (err) {
+      console.log("An Error Occurred!");
+      console.debug(err);
+    }
+  }
 
-module.exports = {
-  // Export Something
-};
+  async add(name) {
+    try {
+      const res = await orm.insertOne({ name, devoured: false });
+      this.id = res.insertId;
+      return res.insertId;
+    }
+    catch (err) {
+      console.log("An Error Occurred!");
+      console.debug(err);
+    }
+  }
+
+  async update(id, devoured) {
+    try {
+      const res = await orm.updateOne({ id, devoured });
+      console.debug("Rows Changed", res.affectedRows);
+
+    } catch (err) {
+      console.log("An Error Ocurred!");
+      console.debug(err);
+    }
+  }
+}
+
+module.exports = Burger;
