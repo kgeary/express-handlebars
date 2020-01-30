@@ -4,7 +4,7 @@ const fs = require("fs");
 const Handlebars = require("handlebars");
 const Burger = require("../models/burger.js");
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const app = express();
 const path_public = path.resolve("../public"); // Need an absolute path
 
