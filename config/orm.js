@@ -1,12 +1,12 @@
 const connection = require("./connection");
 
-function query(sql) {
+function query(sql, values) {
   return new Promise((resolve, reject) => {
-    connection.query(sql, (err, res) => {
+    connection.query(sql, values, (err, res) => {
       if (err) return reject(err);
       resolve(res);
+    })
   })
-})
 }
 
 function selectAll() {
@@ -16,14 +16,16 @@ function selectAll() {
 function insertOne(burger) {
   return query(
     `INSERT INTO burgers (burger_name, devoured) 
-    VALUES ("${burger.name}", ${burger.devoured})`);
+    VALUES (?,?)`,
+    [burger.name, burger.devoured]);
 }
 
 function updateOne(burger) {
   return query(
     `UPDATE burgers 
-    SET devoured=${burger.devoured} 
-    WHERE id=${burger.id}`);
+    SET devoured=? 
+    WHERE id=?`,
+    [burger.devoured, burger.id]);
 }
 
 module.exports = {
