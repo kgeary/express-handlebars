@@ -11,32 +11,25 @@
 </head>
 
 <body>
-  <div class="col-3">
-    <div class="col-left">
-      <h1>Burgers Ready to Eat</h1>
-      {{> left }}
-    </div>
+  <div class="col-left col-side">
+    <h1>Burgers</h1>
+    {{> left }}
   </div>
-  <div class="col-6">
-    <div class="col-mid">
-      <img class="" src="img/hamburger.jpg">
-      <h1>Pick Your Burger</h1>
-      <form method="POST" action="/add">
-        <textarea name="burger" id="burgerText" rows="4" placeholder="Your burger description here"></textarea>
-        <p>
-          <button id="btnSubmit" class="btn btn-primary" type="submit">Submit</button>
-        </p>
-      </form>
-      <p>Enter a description of the burger you would like to eat and hit submit</p>
-    </div>
+  <div class="col-mid">
+    <img class="" src="img/hamburger.jpg">
+    <h1>Pick Your Burger</h1>
+    <form method="POST" action="/add">
+      <textarea name="burger" id="burgerText" rows="4" placeholder="Your burger description here"></textarea>
+      <p>
+        <button id="btnSubmit" type="submit">Submit</button>
+      </p>
+    </form>
+    <p>Enter a description of the burger you would like to eat and hit submit</p>
   </div>
-  <div class="col-3">
-    <div class="col-right">
-      <h1>Wall of Shame</h1>
-      {{> right }}
-    </div>
+  <div class="col-right col-side">
+    <h1>Wall of Shame</h1>
+    {{> right }}
   </div>
-
 </body>
 <script>
   // Devour a new burger

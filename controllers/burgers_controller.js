@@ -1,12 +1,10 @@
-const express = require("express");
-const path = require("path");
 const fs = require("fs");
+const express = require("express");
 const Handlebars = require("handlebars");
 const Burger = require("../models/burger.js");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
-const path_public = path.resolve("../public"); // Need an absolute path
 
 const htmlIndex = fs.readFileSync("./views/index.handlebars");
 const htmlMain = fs.readFileSync("./views/layouts/main.handlebars");
@@ -37,7 +35,7 @@ async function router() {
   });
 
   app.post("/update/:id", (req, res) => {
-    burger.update(req.params.id, 1).then(function () {
+    burger.update(req.params.id, true).then(function () {
       res.redirect("/");
     });
   });
