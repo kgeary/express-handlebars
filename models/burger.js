@@ -18,7 +18,6 @@ class Burger {
   async add(name) {
     try {
       const res = await orm.insertOne({ name, devoured: false });
-      this.id = res.insertId;
       return res.insertId;
     }
     catch (err) {
@@ -31,7 +30,6 @@ class Burger {
     try {
       const res = await orm.updateOne({ id, devoured });
       console.debug("Rows Changed", res.affectedRows);
-
     } catch (err) {
       console.log("An Error Ocurred!");
       console.debug(err);
