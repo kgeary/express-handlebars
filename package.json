@@ -1,5 +1,5 @@
 {
-  "name": "express-handlebars",
+  "name": "expresshandlebars",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -14,8 +14,6 @@
   },
   "devDependencies": {},
   "scripts": {
-    "comp": "handlebars views/index.handlebars -f index.precompiled.js &&
-      handlebars views/layouts/main.handlebars -f main.precompiled.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
