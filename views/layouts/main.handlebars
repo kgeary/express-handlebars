@@ -3,10 +3,12 @@
 {{/unless}}
 <ul class="burger_list" id="list-{{side}}">
   {{#each burgers}}
-  <li class="listItem" data-id="{{this.id}}">
+  <li class="listItem">
     <span>{{this.id}} - {{this.burger_name}}</span>
     {{#unless this.devoured }}
-    <button class="devour" type="button">DEVOUR</button>
+    <form action="/update" method="post">
+      <button class="devour" type="submit" name="id" value="{{this.id}}">DEVOUR</button>
+    </form>
     {{/unless}}
   </li>
   {{/each}}

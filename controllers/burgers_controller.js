@@ -34,8 +34,8 @@ async function router() {
     });
   });
 
-  app.post("/update/:id", (req, res) => {
-    burger.update(req.params.id, true).then(function () {
+  app.post("/update", (req, res) => {
+    burger.update(req.body.id, true).then(function () {
       res.redirect("/");
     });
   });

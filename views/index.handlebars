@@ -7,7 +7,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Burger App</title>
   <link rel="stylesheet" href="css/burger_style.css">
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -31,21 +30,5 @@
     {{> right }}
   </div>
 </body>
-<script>
-  // Devour a new burger
-  var listLeftEl = document.getElementById("list-left");
-  listLeftEl.addEventListener("click", function (event) {
-    if (event.target.matches(".devour")) {
-      var btn = event.target;
-      var li = btn.parentElement;
-      var id = li.getAttribute("data-id");
-      axios.post(`/update/${id}`, { id: id, devoured: true })
-        .then(() => {
-          window.location.href = "/";
-        });
-    }
-  });
-
-</script>
 
 </html>
