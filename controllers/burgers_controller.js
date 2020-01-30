@@ -15,7 +15,7 @@ const templateMain = Handlebars.compile(htmlMain.toString());
 
 // Run the Express Server
 async function router() {
-  console.log("STARTING ROUTER");
+  console.log("STARTING BURGER APP ROUTER");
   const burger = new Burger();
 
   app.use(express.static("public"));
@@ -28,11 +28,11 @@ async function router() {
 
   app.get("/", (req, res) => {
     burger.getAll().then(burgers => {
-      const dataLeft = { burgers: burgers.filter(i => !i.devoured), side: "left", notDevoured: true };
-      const dataRight = { burgers: burgers.filter(i => i.devoured), side: "right", notDevoured: false };
-      const left = Handlebars.registerPartial("left", templateMain(dataLeft))
-      const right = Handlebars.registerPartial("right", templateMain(dataRight))
-      res.send(templateIndex({ left, right }));
+      const dataLeft = { burgers: burgers.filter(i => !i.devoured), side: "left" };
+      const dataRight = { burgers: burgers.filter(i => i.devoured), side: "right" };
+      const partialLeft = Handlebars.registerPartial("left", templateMain(dataLeft))
+      const partialRight = Handlebars.registerPartial("right", templateMain(dataRight))
+      res.send(templateIndex({ left: partialLeft, right: partialRight }));
     });
   });
 
