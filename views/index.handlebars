@@ -1,34 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Burger App</title>
-  <link rel="stylesheet" href="css/burger_style.css">
-</head>
-
-<body>
-  <div class="col-left col-side">
-    <h1>Burgers</h1>
-    {{> left }}
-  </div>
-  <div class="col-mid">
-    <img class="" src="img/hamburger.jpg">
-    <h1>Pick Your Burger</h1>
-    <form method="POST" action="/add">
-      <textarea name="burger" id="burgerText" rows="4" placeholder="Your burger description here"></textarea>
-      <p>
-        <button id="btnSubmit" type="submit">Submit</button>
-      </p>
+{{#unless burgers.length }}
+<h3>No Burgers Yet</h3>
+{{/unless}}
+<ul class="burger_list" id="list-{{side}}">
+  {{#each burgers}}
+  <li class="listItem">
+    <span>{{this.id}} - {{this.burger_name}}</span>
+    {{#unless this.devoured }}
+    <form action="/update" method="post">
+      <button class="devour" type="submit" name="id" value="{{this.id}}">DEVOUR</button>
     </form>
-    <p>Enter a description of the burger you would like to eat and hit submit</p>
-  </div>
-  <div class="col-right col-side">
-    <h1>Wall of Shame</h1>
-    {{> right }}
-  </div>
-</body>
-
-</html>
+    {{/unless}}
+  </li>
+  {{/each}}
+</ul>
+{{#if eaten }}
+{{#if burgers.length }}
+<form id="clearShame" action="/clear" method="post">
+  <button id="clearBtn" type="submit">CLEAR</button>
+</form>
+{{/if}}
+{{/if}}

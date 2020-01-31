@@ -17,6 +17,9 @@ class Burger {
 
   async add(name) {
     try {
+      if (name.trim().length === 0) {
+        return -1;
+      }
       const res = await orm.insertOne({ name, devoured: false });
       return res.insertId;
     }
@@ -29,6 +32,15 @@ class Burger {
   async update(id, devoured) {
     try {
       const res = await orm.updateOne({ id, devoured });
+    } catch (err) {
+      console.log("An Error Ocurred!");
+      console.debug(err);
+    }
+  }
+
+  async remove(options) {
+    try {
+      const res = await orm.remove(options)
       console.debug("Rows Changed", res.affectedRows);
     } catch (err) {
       console.log("An Error Ocurred!");

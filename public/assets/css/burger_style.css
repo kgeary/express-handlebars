@@ -46,10 +46,12 @@ button.devour {
 
 .col-side {
   width: 30%;
-  padding: 0.5rem;
-  padding-top: 4rem;
+  padding: 0.5rem 1rem;
   min-height: 500px;
-  margin: auto 1rem;
+  margin: 7rem 1rem auto 1rem;
+  margin-top: 5rem;
+  min-height: 450px;
+  border-radius: 25px;
 }
 
 .col-mid {
@@ -64,19 +66,11 @@ button.devour {
   background-color: firebrick;
   color: whitesmoke;
   border: 2px solid yellow;
-  border-radius: 25px;
-  padding: 0.5rem 1rem;
-  height: 500px;
-  overflow: auto;
 }
 
 .col-right {
   background-color: #ffe96e;
-  border-radius: 25px;
   border: 2px solid brown;
-  padding: 1rem;
-  height: 500px;
-  overflow: auto;
 }
 
 .listItem {
@@ -120,6 +114,17 @@ button.devour {
   padding: 0.5rem 1rem;
   font-size: 1.5rem;
   text-transform: uppercase;
+}
+
+#clearShame {
+  width: 100%;
+  /* display: flex; */
+  /* justify-content: center; */
+  text-align: center;
+}
+
+#clearBtn {
+  padding: 0.5rem 1rem;
 }
 
 @media only screen and (max-width: 1000px) {

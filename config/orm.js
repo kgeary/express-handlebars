@@ -28,8 +28,18 @@ function updateOne(burger) {
     [burger.devoured, burger.id]);
 }
 
+function remove(options) {
+  let keys = Object.keys(options);
+  let where = keys.map(key => `${key}=${options[key]}`).join(", ");
+  return query(
+    `DELETE FROM burgers
+    WHERE ${where}`
+  )
+}
+
 module.exports = {
   selectAll,
   insertOne,
-  updateOne
+  updateOne,
+  remove,
 }
