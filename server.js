@@ -1,6 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-const burger_controller = require("./controllers/burgers_controller");
+var db = require("./models"); // get a reference to the model
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -27,6 +27,16 @@ app.set("view engine", "handlebars");
 // Setup the burger Routing
 require("./controllers/burgers_controller")(app);
 
-app.listen(PORT, function () {
-  console.log("Listening at http://localhost:" + PORT);
-});
+var syncOptions = { force: false };
+
+// If running a test, set syncOptions.force to true
+// clearing the `testdb`
+if (process.env.NODE_ENV === "test") {
+  syncOptions.force = true;
+}
+
+db.sequelize.sync(syncOptions).then(() => {
+  app.listen(PORT, function () {
+    console.log("Listening at http://localhost:" + PORT);
+  });
+})

@@ -1,52 +1,16 @@
-const orm = require("../config/orm");
-
-class Burger {
-  constructor() {
-    // No properties yet.
-  }
-
-  async getAll() {
-    try {
-      const res = await orm.selectAll();
-      return res;
-    } catch (err) {
-      console.log("An Error Occurred!");
-      console.debug(err);
-    }
-  }
-
-  async add(name) {
-    try {
-      if (name.trim().length === 0) {
-        return -1;
+module.exports = function (sequelize, DataTypes) {
+  const Burger = sequelize.define("Burger", {
+    burger_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 40]
       }
-      const res = await orm.insertOne({ name, devoured: false });
-      return res.insertId;
+    },
+    devoured: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     }
-    catch (err) {
-      console.log("An Error Occurred!");
-      console.debug(err);
-    }
-  }
-
-  async update(id, devoured) {
-    try {
-      const res = await orm.updateOne({ id, devoured });
-    } catch (err) {
-      console.log("An Error Ocurred!");
-      console.debug(err);
-    }
-  }
-
-  async remove(options) {
-    try {
-      const res = await orm.remove(options)
-      console.debug("Rows Changed", res.affectedRows);
-    } catch (err) {
-      console.log("An Error Ocurred!");
-      console.debug(err);
-    }
-  }
+  })
+  return Burger;
 }
-
-module.exports = Burger;
