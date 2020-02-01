@@ -118,13 +118,19 @@ button.devour {
 
 #clearShame {
   width: 100%;
-  /* display: flex; */
-  /* justify-content: center; */
   text-align: center;
 }
 
 #clearBtn {
   padding: 0.5rem 1rem;
+  background-color: chocolate;
+  color: whitesmoke;
+}
+
+#clearBtn:hover {
+  background-color: maroon;
+  color: whitesmoke;
+  box-shadow: black 2px -2px -2px;
 }
 
 @media only screen and (max-width: 1000px) {

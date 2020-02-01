@@ -1,22 +1,47 @@
-{{#unless burgers.length }}
-<h3>No Burgers Yet</h3>
-{{/unless}}
-<ul class="burger_list" id="list-{{side}}">
-  {{#each burgers}}
-  <li class="listItem">
-    <span>{{this.id}} - {{this.burger_name}}</span>
-    {{#unless this.devoured }}
-    <form action="/update" method="post">
-      <button class="devour" type="submit" name="id" value="{{this.id}}">DEVOUR</button>
-    </form>
-    {{/unless}}
-  </li>
-  {{/each}}
-</ul>
-{{#if eaten }}
-{{#if burgers.length }}
-<form id="clearShame" action="/clear" method="post">
-  <button id="clearBtn" type="submit">CLEAR</button>
-</form>
-{{/if}}
-{{/if}}
+<div class="col-left col-side">
+  <h1>Burgers</h1>
+  {{#unless burgersNew.length }}
+  <h3>No Burgers Yet</h3>
+  {{/unless}}
+  <ul class="burger_list" id="list-left">
+    {{#each burgersNew}}
+    <li class="listItem">
+      <span>{{this.id}} - {{this.burger_name}}</span>
+      {{#unless this.devoured }}
+      <form action="/update" method="post">
+        <button class="devour" type="submit" name="id" value="{{this.id}}">DEVOUR</button>
+      </form>
+      {{/unless}}
+    </li>
+    {{/each}}
+  </ul>
+</div>
+<div class="col-mid">
+  <img class="" src="img/hamburger.jpg">
+  <h1>Pick Your Burger</h1>
+  <form method="POST" action="/add">
+    <textarea name="burger" id="burgerText" rows="4" placeholder="Your burger description here"></textarea>
+    <p>
+      <button id="btnSubmit" type="submit">Submit</button>
+    </p>
+  </form>
+  <p>Describe your burger then hit submit</p>
+</div>
+<div class="col-right col-side">
+  <h1>Wall of Shame</h1>
+  {{#unless burgersOld.length }}
+  <h3>No Burgers Yet</h3>
+  {{/unless}}
+  <ul class="burger_list" id="list-right">
+    {{#each burgersOld}}
+    <li class="listItem">
+      <span>{{this.id}} - {{this.burger_name}}</span>
+    </li>
+    {{/each}}
+  </ul>
+  {{#if burgersOld.length }}
+  <form id="clearShame" action="/clear" method="post">
+    <button id="clearBtn" type="submit">CLEAR</button>
+  </form>
+  {{/if}}
+</div>
