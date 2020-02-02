@@ -5,19 +5,11 @@ async function route(app) {
   console.log("STARTING BURGER APP ROUTER");
 
   app.get("/", (req, res) => {
-    db.Burger.findAll({ order: [['updatedAt', 'DESC']] }).then(burgers => {
-      /* Had to map the objects to keep handlebars working */
-      const burgersMapped = burgers.map(i => {
-        return {
-          id: i.id,
-          burger_name: i.burger_name,
-          devoured: i.devoured,
-          updatedAt: i.updatedAt
-        }
-      });
+    // Use raw: true to prevent wrapping the object (to keep handlebars happy)
+    db.Burger.findAll({ order: [['updatedAt', 'DESC']], raw: true }).then(burgers => {
       res.render("index", {
-        burgersNew: burgersMapped.filter(i => !i.devoured),
-        burgersOld: burgersMapped.filter(i => i.devoured),
+        burgersNew: burgers.filter(i => !i.devoured),
+        burgersOld: burgers.filter(i => i.devoured),
       });
     });
   });
